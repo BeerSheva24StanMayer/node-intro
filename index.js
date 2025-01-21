@@ -1,4 +1,0 @@
-//numbers
-//var
-//let
-//const
