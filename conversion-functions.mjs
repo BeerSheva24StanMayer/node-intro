@@ -1,6 +1,9 @@
 const zeroCode = "0".charCodeAt(0);
 const aCode = "a".charCodeAt(0);
 const nineCode = "9".charCodeAt(0);
+const MIN_CODE = 32;
+const MAX_CODE = 126;
+const N_CODES = MAX_CODE - MIN_CODE + 1;
 export function myParseIntRadix(strNum, radix) {
     //converting from string to number taking in consideration different number systems
     //radix is number of digits in the number system
@@ -89,4 +92,47 @@ function getActualRadix(radix) {
         actualRadix = radix > 1 && radix < 37 ? radix : NaN;
     }
     return actualRadix;
+}
+//Printed ASCII table codes are from 32 (Space) to 126 (~)
+export function stringShift(str, shift) {
+    //each character code inside string is increased on the shift value 'a' shifted on 3 will result character 'd'
+    //'9' shifted on 2 will result ';'
+    //if shifting causes exiting out of printable ASCII character there will by cycling from the begining
+    //if the 'shift' is either a negative number or not a number the given string should be returned with no updating
+    // stringShift("Hello", 3) -> "Khoor"
+    // stringShift("~Z4", 3) -> '"]7'
+    return shiftUnshift(str, shift, true);
+
+}
+export function stringUnshift(str, unshift) {
+    //each character code inside string is decreased on the unshift value 'd' unshifted on 3 will result character 'a'
+    //';' ushifted on 2 will result '9'
+    //if ushifting causes exiting out of printable ASCII character there will be cycling from the end
+    //if the 'ushift' is either a negative number or not a number the given string should be returned with no updating
+    // stringUnshift("Khoor", 3) -> "Hello"
+    // stringUnhift('"]7', 3) -> "~Z4"
+    return shiftUnshift(str, unshift, false);
+
+}
+function getActualShift(code, shift, isShift) {
+    const actualShift =  isShift ? (code - MIN_CODE)  : (MAX_CODE - code) ;
+    return (actualShift + shift) % N_CODES;
+}
+function shiftUnshiftOneChar(code, shift, isShift) {
+    const actualShift = getActualShift(code, shift, isShift);
+    const codeResult = isShift ? MIN_CODE +  actualShift : MAX_CODE - actualShift;
+    return String.fromCharCode(codeResult);
+}
+function shiftUnshift(str, shift, isShift) {
+    let res = str;
+    // undefined.toString() -> "undefined"
+    shift = parseInt(shift);
+    if(str != undefined && shift > 0 ) {
+        str = str.toString();
+        res = '';
+        for (let i = 0; i < str.length; i++) {
+            res += shiftUnshiftOneChar(str[i].charCodeAt(0), shift, isShift)
+        }
+    }
+    return res;
 }

@@ -3,11 +3,11 @@ import { myParseInt, myParseIntRadix } from "../conversion-functions.mjs";
 test ("standard parseInt method with some wrong value", () => {
     expect(parseInt(10, 1)).toBeNaN();
 })
-test ("standard parseInt method without radix", () => {
+test ("standard parseInt method with out radix", () => {
     expect(parseInt(10)).toBe(10);
 })
 test ("standard parseInt method with radix equaled null", () => {
-    expect(parseInt(10, null)).toBe(10);
+    expect(parseInt(10, null)).toBeNaN();
 })
 test("swap primitives", () => {
     let a = 10;
