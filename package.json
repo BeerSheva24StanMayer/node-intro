@@ -1,14 +1,14 @@
 {
-"name": "js-introduction",
-"version": "1.0.0",
-"scripts": {
-"test": "vitest"
-},
-"keywords": [],
-"author": "",
-"license": "ISC",
-"description": "",
-"devDependencies": {
-"vitest": "^3.0.2"
+  "name": "js-introduction",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+"vitest": "^3.0.3"
 }
 }
